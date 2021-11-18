@@ -1,0 +1,4 @@
+# depslib dependency file v1.0
+1637234205 source:/home/reinhard/cppprojects/bank/main.cpp
+	<iostream>
+
