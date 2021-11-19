@@ -7,8 +7,9 @@ class BankAccount{
     static const int interestRate = 0.03;
     private:
         int accNumber;
-        int accBalance;
+        float accBalance;
         int compound;
+        int compoundDisplay;
         int inTime;
         int sizeOfObject;
     public:
@@ -31,13 +32,12 @@ class BankAccount{
                 cout << "Enter a valid account balance(a positve a value): ";
                 cin >> accBalance;
             }
-            cout << "\n";
+            //cout << "\n";
         }
         void computeInterest(int years){
         compound = accBalance;
            for(int i = 0; i < years; i++){
                 compound = compound + compound * 0.03;
-                cout << "Account Balance for Year " << i+1 << " is: " << compound << endl;
            }
            cout << "\n";
         }
@@ -45,6 +45,11 @@ class BankAccount{
             cout << "Account Number: " << accNumber << endl;
             cout << "Initial Account Balance: " << accBalance << endl;
             cout << "Final Account Balance: " << compound << endl << "\n";
+            compoundDisplay = accBalance;
+            for(int i = 0; i < inTime; i++){
+                compoundDisplay = compoundDisplay + compoundDisplay * 0.03;
+                cout << "Account Balance for Year " << i+1 << " is: " << compoundDisplay << endl;
+            }
         }
         int getInTime(){
             return inTime;
@@ -63,7 +68,6 @@ class BankAccount{
  int objectCount;
  void displayBankInfo(BankAccount customer[10]){
     cout << "No. of Bank Accounts: " << cnt << endl;
-    cout << "Hello There\n";
     for(int i = 0; i < cnt; i++){
         customer[i].displayAccount();
     }
@@ -85,7 +89,7 @@ int main()
             } else if (response == 'N' || response == 'n'){
                 i = 9;
             } else {
-                while(response != 'Y' || response == 'y' || response == 'N' || response == 'n'){
+                while(response != 'Y' || response != 'y' || response != 'N' || response != 'n'){
                     cout << "Enter Valid Input(Y/N)!";
                 }
             }
