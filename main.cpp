@@ -3,23 +3,17 @@
 using namespace std;
 
 int cnt = 0;
+static const float interestRate = 0.03;
 class BankAccount{
-    static const int interestRate = 0.03;
     private:
         int accNumber;
         float accBalance;
-        int compound;
-        int compoundDisplay;
+        float compound;
+        float compoundDisplay;
         int inTime;
         int sizeOfObject;
     public:
         void enterAccountData(){
-            cout << "Enter a term between 1 and 40(inclusive): ";
-            cin >> inTime;
-            while(inTime < 0 || inTime > 40){
-                cout << "Enter a valid term between 1 and 40! : ";
-                cin >> inTime;
-            }
             cout << "Enter account number: ";
             cin >> accNumber;
             while(accNumber < 1000){
@@ -29,27 +23,35 @@ class BankAccount{
             cout << "Enter account balance: ";
             cin >> accBalance;
             while(accBalance < 0){
-                cout << "Enter a valid account balance(a positve a value): ";
+                cout << "Enter a valid account balance(a positive a value): ";
                 cin >> accBalance;
+            }
+            cout << "Enter a term between 1 and 40(inclusive): ";
+            cin >> inTime;
+            while(inTime < 0 || inTime > 40){
+                cout << "Enter a valid term between 1 and 40! : ";
+                cin >> inTime;
             }
             //cout << "\n";
         }
         void computeInterest(int years){
         compound = accBalance;
            for(int i = 0; i < years; i++){
-                compound = compound + compound * 0.03;
+                compound = compound + compound * interestRate;
            }
            cout << "\n";
         }
         void displayAccount(){
-            cout << "Account Number: " << accNumber << endl;
-            cout << "Initial Account Balance: " << accBalance << endl;
-            cout << "Final Account Balance: " << compound << endl << "\n";
             compoundDisplay = accBalance;
+            cout << "Account Number: " << accNumber << endl << "\n";
             for(int i = 0; i < inTime; i++){
                 compoundDisplay = compoundDisplay + compoundDisplay * 0.03;
                 cout << "Account Balance for Year " << i+1 << " is: " << compoundDisplay << endl;
+                cout << "***** ***** ***** ***** ***** ******" << endl;
             }
+            cout << "Initial Account Balance: " << accBalance << endl;
+            cout << "Final Account Balance: " << compound << endl;
+            cout << "***** ***** ***** ***** ***** ******" << endl << "\n" << "\n";
         }
         int getInTime(){
             return inTime;
@@ -68,6 +70,7 @@ class BankAccount{
  int objectCount;
  void displayBankInfo(BankAccount customer[10]){
     cout << "No. of Bank Accounts: " << cnt << endl;
+    cout << "\n";
     for(int i = 0; i < cnt; i++){
         customer[i].displayAccount();
     }
@@ -101,5 +104,5 @@ int main()
     }
 
     displayBankInfo(customer);
-
+    cout << "Complete!";
 }
